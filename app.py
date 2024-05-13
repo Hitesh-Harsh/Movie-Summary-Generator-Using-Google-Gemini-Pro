@@ -1,11 +1,17 @@
 import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
-load_dotenv() #load all the environment variables
-from youtube_transcript_api import YouTubeTranscriptApi
-import os
-genai.configure(api_key=GOOGLE_API_KEY)
-prompt="You are a Youtube Video Summarizer. You will be taking the transcript text and summarizing the entire video and providing the important summary points in 250 Words in English.The Transcript text will be appended here"
+import os  # Import os module for accessing environment variables
+
+# Load environment variables
+load_dotenv()
+
+# Configure GenerativeAI with API Key from environment variables
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Prompt for the GenerativeAI model
+prompt = "You are a Youtube Video Summarizer. You will be taking the transcript text and summarizing the entire video and providing the important summary points in 250 Words in English. The Transcript text will be appended here"
+
 def extract_transcript_details(youtube_video_url):
     try:
        video_id=youtube_video_url.split('=')[1]
@@ -16,7 +22,6 @@ def extract_transcript_details(youtube_video_url):
        return transcript
     except Exception as e:
         raise e
-
 
 def generate_gemini_content(transcript_text,prompt):
     model=genai.GenerativeModel("gemini-pro")
