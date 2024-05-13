@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv() #load all the environment variables
 from youtube_transcript_api import YouTubeTranscriptApi
 import os
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=GOOGLE_API_KEY)
 prompt="You are a Youtube Video Summarizer. You will be taking the transcript text and summarizing the entire video and providing the important summary points in 250 Words in English.The Transcript text will be appended here"
 def extract_transcript_details(youtube_video_url):
     try:
