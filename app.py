@@ -1,21 +1,20 @@
 import streamlit as st
 import google.generativeai as genai
 from youtube_transcript_api import YouTubeTranscriptApi
-import os
 
-# Configure GenerativeAI with the API key from environment variable
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# Configure GenerativeAI with the API key from Streamlit Secrets
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 prompt = "You are a Youtube Video Summarizer. You will be taking the transcript text and summarizing the entire video and providing the important summary points in 250 Words in English. The Transcript text will be appended here"
 
 def extract_transcript_details(youtube_video_url):
     try:
-       video_id=youtube_video_url.split('=')[1]
-       transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
-       transcript=""
-       for i in transcript_text:
-           transcript+=" "+i["text"]
-       return transcript
+        video_id=youtube_video_url.split('=')[1]
+        transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
+        transcript=""
+        for i in transcript_text:
+            transcript+=" "+i["text"]
+        return transcript
     except Exception as e:
         raise e
 
