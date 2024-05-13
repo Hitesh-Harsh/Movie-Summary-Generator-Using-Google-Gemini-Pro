@@ -30,7 +30,7 @@ def parse_srt_file(uploaded_file):
         return None
 
 def main():
-    st.image(r"C:\Users\hites\Project LLM\pexels-tima-miroshnichenko-5662857.jpg", caption="Image Caption",width=1000, use_column_width=True)
+    st.image("pexels-tima-miroshnichenko-5662857.jpg", caption="Image Caption", width=1000, use_column_width=True)
     st.title("YouTube Transcript to Detailed Notes Converter")
     uploaded_file = st.file_uploader("Upload an SRT file", type="srt")
 
